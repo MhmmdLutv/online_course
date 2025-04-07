@@ -40,7 +40,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
     Route::get('/dashboard', [dashboardController::class, 'index'])->name('dashboard');
-    
+
 });
 
 // ✅ KHUSUS ADMIN
@@ -74,4 +74,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/kursusPengguna', [kursusPenggunaController::class, 'index'])->name('kursusPengguna.index');
     Route::get('/materiPengguna', [materiPenggunaController::class, 'index'])->name('materiPengguna.index');
+    Route::post('/keranjang/tambah/{id}', [App\Http\Controllers\dashboardController::class, 'tambah'])->name('keranjang.tambah');
+
 });

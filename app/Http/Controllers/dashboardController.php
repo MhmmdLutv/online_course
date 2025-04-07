@@ -20,21 +20,68 @@ class dashboardController extends Controller
         if (!Auth::check()) {
             return redirect('/login')->with('error', 'Silakan login terlebih dahulu.');
         }
-    
+
         $user = Auth::user();
-    
+
         if ($user->role === 'admin') {
             $totalKursus = kursus::count();
             $totalMateri = materi::count();
             $totalPembayaran = pembayaran::count();
-    
+
             return view('dashboard.home', compact('totalKursus', 'totalMateri', 'totalPembayaran'));
-        } elseif ($user->role === 'user') { 
-            return view('dashboard.user');
-        }else{
-           return redirect('/login')->with('error', 'Akses tidak diizinkan.');
+        } elseif ($user->role === 'user') {
+            // Data kursus untuk user
+            $kursusList = [
+                [
+                    'image' => asset('/assets/images/slider/img-slide-1.jpg'),
+                    'judul' => 'Dasar-Dasar Pengembangan Website: HTML, CSS dan...',
+                    'pengajar' => 'Remote Worker Indonesia',
+                    'rating' => 4.6,
+                    'ulasan' => 56,
+                    'harga_asli' => 309000,
+                    'harga_diskon' => 99000,
+                    'status' => ''
+                ],
+                [
+                    'image' => asset('/assets/images/slider/img-slide-2.jpg'),
+                    'judul' => 'Belajar Web Development Menggunakan Bahasa...',
+                    'pengajar' => 'CodePolitan Online',
+                    'rating' => 4.6,
+                    'ulasan' => 393,
+                    'harga_asli' => 529000,
+                    'harga_diskon' => 99000,
+                    'status' => ''
+                ],
+                [
+                    'image' => asset('/assets/images/slider/img-slide-4.jpg'),
+                    'judul' => 'Web Programming Dasar Sampai Mahir',
+                    'pengajar' => 'Dr. Junaidi S.Kom',
+                    'rating' => 4.8,
+                    'ulasan' => 33,
+                    'harga_asli' => 289000,
+                    'harga_diskon' => 99000,
+                    'status' => ''
+                ],
+                [
+                    'image' => asset('/assets/images/slider/img-slide-6.jpg'),
+                    'judul' => 'The Complete Full-Stack Web Development Bootcamp',
+                    'pengajar' => 'Dr. Angela Yu',
+                    'rating' => 4.7,
+                    'ulasan' => 432128,
+                    'harga_asli' => 639000,
+                    'harga_diskon' => 99000,
+                    'status' => 'Terlaris'
+                ]
+            ];
+
+            
+
+            return view('dashboard.user', compact('kursusList'));
+        } else {
+            return redirect('/login')->with('error', 'Akses tidak diizinkan.');
         }
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -45,7 +92,7 @@ class dashboardController extends Controller
     {
         return view('dashboard.home'); // view untuk admin
     }
-    
+
     public function user()
     {
         return view('dashboard.user'); // view untuk user
