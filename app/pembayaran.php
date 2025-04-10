@@ -20,4 +20,9 @@ class pembayaran extends Model
     {
         return $this->belongsTo(kursus::class, 'kursusid', 'kursusid');
     }
+
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'users_id', 'user_id');
+    }
 }

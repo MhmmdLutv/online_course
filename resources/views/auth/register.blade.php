@@ -1,77 +1,115 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Kursus App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f0f2f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+        .register-container {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
+        .register-card {
+            background-color: #fff;
+            border-radius: 1rem;
+            padding: 2rem 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+        }
 
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+        .register-card h3 {
+            font-weight: 700;
+            color: #4e54c8;
+            margin-bottom: 1.5rem;
+        }
 
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+        .btn-register {
+            background-color: #4e54c8;
+            border: none;
+            border-radius: 50px;
+            padding: 0.6rem 1.5rem;
+            font-weight: 600;
+        }
 
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+        .btn-register:hover {
+            background-color: #5d63d3;
+        }
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+        .form-control {
+            border-radius: 0.5rem;
+        }
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+        .text-link {
+            color: #4e54c8;
+        }
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+        .text-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+<div class="register-container">
+    <div class="register-card">
+        <h3 class="text-center">Daftar Akun</h3>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+        <form method="POST" action="{{ route('register') }}">
+            @csrf
 
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+            <div class="form-group">
+                <label for="name">Nama</label>
+                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
+                       name="name" value="{{ old('name') }}" required autofocus>
+                @error('name')
+                    <span class="text-danger small">{{ $message }}</span>
+                @enderror
             </div>
-        </div>
+
+            <div class="form-group">
+                <label for="email">E-Mail</label>
+                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                       name="email" value="{{ old('email') }}" required>
+                @error('email')
+                    <span class="text-danger small">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="password">Kata Sandi</label>
+                <input id="password" type="password"
+                       class="form-control @error('password') is-invalid @enderror"
+                       name="password" required>
+                @error('password')
+                    <span class="text-danger small">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="password-confirm">Konfirmasi Kata Sandi</label>
+                <input id="password-confirm" type="password" class="form-control"
+                       name="password_confirmation" required>
+            </div>
+
+            <button type="submit" class="btn btn-register btn-block">Daftar</button>
+
+            <div class="text-center mt-3">
+                <span>Sudah punya akun?</span>
+                <a class="text-link" href="{{ route('login') }}">Masuk</a>
+            </div>
+        </form>
     </div>
 </div>
-@endsection
+
+</body>
+</html>

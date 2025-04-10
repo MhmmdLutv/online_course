@@ -7,7 +7,8 @@ use App\Http\Controllers\materiController;
 use App\Http\Controllers\pembayaranController;
 use App\Http\Controllers\kursusPenggunaController;
 use App\Http\Controllers\materiPenggunaController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\userController;
+// use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,9 +38,19 @@ Auth::routes();
 
 // ✅ BISA DIAKSES OLEH ADMIN DAN USER
 Route::middleware(['auth'])->group(function () {
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/dashboard', function () {
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return redirect()->route('dashboard.admin');
+        } else {
+            return redirect()->route('dashboard.user');
+        }
+    });
 
-    Route::get('/dashboard', [dashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/admin', [dashboardController::class, 'index'])->name('dashboard.admin');
+    Route::get('/dashboard/user', [dashboardController::class, 'index'])->name('dashboard.user');
+
+    Route::get('/pembayaran/berhasil', [pembayaranController::class, 'berhasil'])->name('pembayaran.berhasil');
 
 });
 
@@ -68,12 +79,23 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::put('/pembayaran/{pembayaran}', [pembayaranController::class, 'update'])->name('pembayaran.update');
     Route::delete('/pembayaran/{pembayaran}', [pembayaranController::class, 'destroy'])->name('pembayaran.destroy');
     Route::get('/pembayaran/{pembayaran}', [pembayaranController::class, 'show'])->name('pembayaran.show');
+
+    Route::get('/users', [userController::class, 'index'])->name('users.index');
+    Route::get('/users/create', [userController::class, 'create'])->name('users.create');
+    Route::post('/users', [userController::class, 'store'])->name('users.store');
+    Route::get('/users/{users}/edit', [userController::class, 'edit'])->name('users.edit');
+    Route::put('/users/{users}', [userController::class, 'update'])->name('users.update');
+    Route::delete('/users/{users}', [userController::class, 'destroy'])->name('users.destroy');
+    Route::get('/users/{users}', [userController::class, 'show'])->name('users.show');
 });
 
 // ✅ KHUSUS USER
 Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/kursusPengguna', [kursusPenggunaController::class, 'index'])->name('kursusPengguna.index');
     Route::get('/materiPengguna', [materiPenggunaController::class, 'index'])->name('materiPengguna.index');
-    Route::post('/keranjang/tambah/{id}', [App\Http\Controllers\dashboardController::class, 'tambah'])->name('keranjang.tambah');
 
+    Route::get('/pembayaran/create', [pembayaranController::class, 'create'])->name('pembayaran.create');
+    Route::post('/pembayaran', [pembayaranController::class, 'store'])->name('pembayaran.store');
+    
 });
+

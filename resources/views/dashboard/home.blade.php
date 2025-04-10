@@ -27,7 +27,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h6 class="mb-2 f-w-400 text-muted">Total Pengguna</h6>
-                            {{-- <h4 class="mb-3">0 <span class="badge bg-light-primary border border-primary"></span></h4> --}}
+                            <h4 class="mb-3">{{ number_format($totalPengguna) }}<span class="badge bg-light-primary border border-primary"></span></h4>
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h6 class="mb-2 f-w-400 text-muted">Total Kursus</h6>
-                            {{-- <h4 class="mb-3">{{ ($totalKursus) }} <span class="badge bg-light-success border border-success"></span></h4> --}}
+                            <h4 class="mb-3">{{ number_format($totalKursus) }} <span class="badge bg-light-success border border-success"></span></h4>
                         </div>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h6 class="mb-2 f-w-400 text-muted">Total Materi</h6>
-                            {{-- <h4 class="mb-3">{{ number_format($totalMateri) }} <span class="badge bg-light-warning border border-warning"></span></h4> --}}
+                            <h4 class="mb-3">{{ number_format($totalMateri) }} <span class="badge bg-light-warning border border-warning"></span></h4> 
                         </div>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h6 class="mb-2 f-w-400 text-muted">Total Pembayaran</h6>
-                            {{-- <h4 class="mb-3">{{ number_format($totalPembayaran) }} <span class="badge bg-light-danger border border-danger"></span></h4> --}}
+                            <h4 class="mb-3">{{ number_format($totalPembayaran) }} <span class="badge bg-light-danger border border-danger"></span></h4> 
                         </div>
                     </div>
                 </div>

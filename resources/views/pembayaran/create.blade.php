@@ -63,8 +63,9 @@
                                                 <div class="mb-3">
                                                     <label for="tujuan_tf" class="form-label">Tujuan Transfer</label>
                                                     <input type="text" name="tujuan_tf" id="tujuan_tf" class="form-control"
-                                                        required>
+                                                        value="BNI 1882908000 A/n Siti Halimah" readonly required>
                                                 </div>
+
 
                                                 <div class="mb-3">
                                                     <label for="tanggal_tf" class="form-label">Tanggal Transfer</label>
@@ -80,7 +81,8 @@
                                                 </div>
 
                                                 <button type="submit" class="btn btn-primary">Simpan</button>
-                                                <a href="{{ route('materiPengguna.index') }}" class="btn btn-secondary">Batal</a>
+                                                <a href="{{ route('materiPengguna.index') }}"
+                                                    class="btn btn-secondary">Batal</a>
                                             </form>
                                         </div>
                                     </body>

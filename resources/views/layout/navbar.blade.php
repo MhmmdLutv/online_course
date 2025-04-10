@@ -46,6 +46,12 @@
                 <span class="pc-mtext">Pembayaran</span>
               </a>
             </li>
+            <li class="pc-item">
+              <a href="{{ route('users.index') }}" class="pc-link">
+                <span class="pc-micon"><i class="ti ti-plant-2"></i></span>
+                <span class="pc-mtext">Pengguna</span>
+              </a>
+            </li>
           @endif
   
           {{-- MENU UNTUK USER --}}

@@ -62,34 +62,26 @@
 
 <div class="login-container">
     <div class="login-card">
-        <h3 class="text-center">Welcome Back 👋</h3>
+        <h3 class="text-center">Kursus Online Mantis</h3>
 
        <form method="POST" action="{{ route('login') }}">
           @csrf
             <div class="form-group">
-                <label for="email">Email address</label>
+                <label for="email">E-Mail</label>
                 <input id="email" type="email" class="form-control" name="email"
                        value="{{ old('email') }}" required autofocus>
             </div>
 
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password">Kata Sandi</label>
                 <input id="password" type="password" class="form-control" name="password" required>
             </div>
 
-            <div class="form-group form-check">
-                <input class="form-check-input" type="checkbox" name="remember" id="remember">
-                <label class="form-check-label" for="remember">Remember Me</label>
-            </div>
+            <button type="submit" class="btn btn-login btn-block">Masuk</button>
 
-            <button type="submit" class="btn btn-login btn-block">Login</button>
-
-            <div class="text-center mt-3">
-                <a href="/password/reset" class="text-link">Forgot your password?</a>
-            </div>
             <div class="text-center mt-2">
-                <span>Don't have an account?</span>
-                <a class="text-link"  href="{{ route('register') }}">{{ __('Register') }}</a>
+                <span>Belum memiliki Akun?</span>
+                <a class="text-link"  href="{{ route('register') }}">{{ __('Daftar') }}</a>
             </div>
         </form>
     </div>

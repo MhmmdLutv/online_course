@@ -16,9 +16,19 @@ class CheckRole
      */
     public function handle($request, Closure $next, ...$roles)
     {
-        if (!in_array(auth()->user()->role, $roles)) {
-            abort(403, 'Unauthorized.');
+        if (!Auth::check()) {
+            return redirect('/login');
         }
+    
+        if (!Auth::user()) {
+            Auth::logout();
+            return redirect('/login')->withErrors(['email' => 'Akun tidak ditemukan.']);
+        }
+    
+        if (!in_array(Auth::user()->role, $roles)) {
+            return abort(403, 'Unauthorized');
+        }
+    
         return $next($request);
     }
 }

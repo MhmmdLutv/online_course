@@ -47,7 +47,7 @@ class pembayaranController extends Controller
 
         pembayaran::create($request->all());
 
-        return redirect()->route('pembayaran.index')->with('success', 'Pembayaran berhasil!');
+        return redirect()->route('pembayaran.berhasil')->with('success', 'Pembayaran berhasil!');
     }
 
     /**
@@ -109,5 +109,11 @@ class pembayaranController extends Controller
         $pembayaran->delete();
 
         return redirect()->route('pembayaran.index')->with('success', 'Pembayaran berhasil dihapus!');
+    }
+
+    public function berhasil()
+    {
+        $telegramLink = "https://t.me/+9pzfoeGXsYc2ZWE1"; 
+        return view('pembayaran.berhasil', compact('telegramLink'));
     }
 }
