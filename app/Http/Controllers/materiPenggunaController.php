@@ -15,8 +15,7 @@ class materiPenggunaController extends Controller
     public function index(Request $request)
     {
         // Ambil daftar kursus dengan relasi yang benar
-        $kursusPengguna = KursusPengguna::where('id');
-
+        $kursusPengguna = KursusPengguna::all();
         // Ambil daftar materi dengan filter kursus (jika ada)
         $materiPengguna = MateriPengguna::when($request->kursusid, function ($query) use ($request) {
             return $query->where('kursusid', $request->kursusid);
